@@ -2,6 +2,15 @@
 
 Install with pip:
 
+Optional:
+    Create virtual environment and activate
+    ```
+    python -m venv venv
+    /venv/Scripts/activate (for Windows command prompt)
+    source venv/Scripts/activate (for git bash terminal)
+    source venv/bin/activate (for linux based OS)
+    ```
+
 ```
 $ pip install -r requirements.txt
 ```
