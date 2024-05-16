@@ -45,7 +45,7 @@ Chat with Documents
                         data-validation-required-message="Cannot leave this blank."
                         class="appearance-none bg-white border border-gray-300 py-2 px-3 rounded-md text-[1em] leading-tight transition duration-200 outline-none placeholder:opacity-100 placeholder:text-gray-400 focus-within:border-indigo-700 w-full h-full"
                         aria-label="Email"
-                        type="email"
+                        type="text"
                         placeholder="Enter your question here"
                       />
                     </div>
@@ -70,22 +70,22 @@ Chat with Documents
                     confirmation email.
                   </p>
                     
+
                 <div>
-                {% if session['query'] %}
-                <p>Query: {{ session['query'] }}</p>
-                {% endif %}
-                </div>  
-                <div>
-                {% if session['answer'] %}
-                <p>Response: {{ session['answer'] }}</p>
-                {% endif %}
-                </div>
+                {% for history in session['history'] %}
+                <p>
+                 Query: {{ history[0] }} 
+                </p>
+                <p>
+                  Ansswer: {{ history[1] }}
+                </p>
+                {% endfor %}
+              </div>
                   <div class="mt-2 lg:mt-3">
                     <small class="text-xs text-gray-500"
                       >By subscribing you agree to our
                       <a class="text-gray-700" href="#0">privacy policy</a
-                      >.</small
-                    >
+                      >.</small>
                   </div>
                 </div>
               </section>
