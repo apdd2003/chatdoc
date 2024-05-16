@@ -4,31 +4,90 @@ Chat with Documents
 {% endblock %}
 
 {% block content %}
+    <div class="text-center">
+              <h1
+                class="text-4xl font-bold tracking-tight text-gray-900 sm:text-6xl"
+              >
+                Chat with your Documents
+              </h1>
+              <p class="mt-6 text-lg leading-8 text-gray-600">
+                Easily Upload your document and chat with it.
+              </p>
+              <form method="post" enctype="multipart/form-data">
+                <div class="mt-10 flex items-center justify-center gap-x-6">
+                  <input type="file" name="file" />
+                  <input
+                    type="submit"
+                    class="rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+                    value="Upload"
+                  />
+                  <!-- <div class="mt-6 flex items-center justify-end gap-x-6">
+                  <button type="button" class="text-sm font-semibold leading-6 text-gray-900">Cancel</button>
+                  <button type="submit" class="rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">Save</button>
+                </div> -->
+                  <!-- <a href="#" class="rounded-md bg-indigo-600 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">Get started</a>
+                <a href="#" class="text-sm font-semibold leading-6 text-gray-900">Learn more <span aria-hidden="true">→</span></a> -->
+                </div>
+                  <p>File: {{ filename }}</p>
+              </form>
+              <hr class="mt-14 mb-14" />
+              <section class="newsletter py-12 lg:py-20 text-center">
+                <div
+                  class="w-[calc(100%_-_2.5rem)] lg:w-[calc(100%_-_4rem)] mx-auto max-w-xl"
+                >
+                  <form class="flex flex-wrap gap-1.5 lg:gap-2" action="{{url_for('chat') }}">
+                    <div
+                      class="basis-full min-w-0 max-w-full sm:grow sm:basis-0"
+                    >
+                      <input
+                        id="query"
+                        name="query"
+                        data-validation-required-message="Cannot leave this blank."
+                        class="appearance-none bg-white border border-gray-300 py-2 px-3 rounded-md text-[1em] leading-tight transition duration-200 outline-none placeholder:opacity-100 placeholder:text-gray-400 focus-within:border-indigo-700 w-full h-full"
+                        aria-label="Email"
+                        type="email"
+                        placeholder="Enter your question here"
+                      />
+                    </div>
 
-<h6>Upload new File</h6>
-    <form method=post enctype=multipart/form-data>
-      <input type=file name=file>
-      <input type=submit value=Upload>
-    </form>
-    <div>
-        File: {{ filename }}
-    </div>
+                    <div
+                      class="basis-full min-w-0 max-w-full sm:grow-0 sm:basis-[initial] sm:max-w-[initial]"
+                    >
+                      <button
+                        type="submit"
+                        class="bg-indigo-700 text-white shadow-md text-[1em] px-4 py-2 rounded-md relative inline-flex justify-center items-center whitespace-nowrap cursor-pointer no-underline leading-tight transition-all duration-200 hover:bg-indigo-600 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-700 w-full h-full"
+                      >
+                        Ask Now
+                      </button>
+                    </div>
+                  </form>
 
-
-    <form action="{{url_for('chat') }}">
-        <label>Query</label>
-        <input type="text" class="form-control" placeholder="Ask a question" id="query" name="query"  data-validation-required-message="Cannot leave this blank.">
-        <input type=submit value=Ask>
-      </form>
-
-    <div>
-        {% if session['query'] %}
-        <p>Query: {{ session['query'] }}</p>
-        {% endif %}
-    </div>  
-    <div>
-      {% if session['answer'] %}
-      <p>Response: {{ session['answer'] }}</p>
-      {% endif %}
-    </div>
+                  <p
+                    role="alert"
+                    class="bg-teal-600/20 text-sm lg:text-base p-2 lg:p-3 rounded mt-2 lg:mt-3"
+                  >
+                    <strong>Success!</strong> Please check your inbox for a
+                    confirmation email.
+                  </p>
+                    
+                <div>
+                {% if session['query'] %}
+                <p>Query: {{ session['query'] }}</p>
+                {% endif %}
+                </div>  
+                <div>
+                {% if session['answer'] %}
+                <p>Response: {{ session['answer'] }}</p>
+                {% endif %}
+                </div>
+                  <div class="mt-2 lg:mt-3">
+                    <small class="text-xs text-gray-500"
+                      >By subscribing you agree to our
+                      <a class="text-gray-700" href="#0">privacy policy</a
+                      >.</small
+                    >
+                  </div>
+                </div>
+              </section>
+            </div>
 {% endblock %}
