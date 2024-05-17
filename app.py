@@ -2,6 +2,8 @@ from flask import Flask, render_template, redirect, url_for, flash, request, cur
 from werkzeug.utils import secure_filename
 import os
 from utils import chunk_embed, askdoc
+import uuid
+
 
 UPLOAD_FOLDER = 'uploads'
 ALLOWED_EXTENSIONS = {'txt', 'pdf', 'docx'}
@@ -16,6 +18,7 @@ def allowed_file(filename):
 
 @app.route('/',methods=['GET', 'POST'])
 def home():
+    session['uid'] = str(uuid.uuid4())
     query = request.args.get('query')
     if request.method == 'POST':
     # check if the post request has the file part
@@ -42,7 +45,8 @@ def chat():
     query = request.args.get('query')
     file_name  = session['file_name'] 
     print(file_name)
-    crc = chunk_embed(file_name)
+    nspace = session['uid']
+    crc = chunk_embed(file_name, nspace)
     answer = askdoc(query,crc)
     session['query'] = query
     session['answer'] = answer

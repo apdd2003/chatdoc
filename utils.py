@@ -10,7 +10,7 @@ from apikey import apikey
 
 os.environ["OPENAI_API_KEY"] = apikey
 
-def chunk_embed(file_name):
+def chunk_embed(file_name, np):
     with open(f'uploads/{file_name}','rb') as f:
         bytes_data = f.read()
     with open (file_name, 'wb') as f:
@@ -30,7 +30,7 @@ def chunk_embed(file_name):
         text_splitter = RecursiveCharacterTextSplitter(chunk_size=1000, chunk_overlap=200)
         chunks = text_splitter.split_documents(documents)
         embeddings = OpenAIEmbeddings()
-        vector_store = Chroma.from_documents(chunks, embeddings)
+        vector_store = Chroma.from_documents(chunks, embeddings, collection_name=np)
         # initialize OpenAI instance
         llm = ChatOpenAI(model='gpt-3.5-turbo', temperature=0)
         retriever=vector_store.as_retriever()
