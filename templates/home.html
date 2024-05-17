@@ -62,23 +62,24 @@ Chat with Documents
                     </div>
                   </form>
 
-                  <p
+                  <!-- <p
                     role="alert"
                     class="bg-teal-600/20 text-sm lg:text-base p-2 lg:p-3 rounded mt-2 lg:mt-3"
                   >
-                    <strong>Success!</strong> Please check your inbox for a
+                    <strong>Success!</strong> Please check your inbox for the
                     confirmation email.
-                  </p>
+                  </p> -->
                     
-
+                  <br/><br/>
                 <div>
                 {% for history in session['history'] %}
-                <p>
-                 Query: {{ history[0] }} 
+                <p style="text-align: left;">
+                <span style="font-weight: bold;"> Query: </span>{{ history[0] }} 
                 </p>
-                <p>
-                  Ansswer: {{ history[1] }}
+                <p style="text-align: left;">
+                  <span style="font-weight: bold;">Answer:</span> {{ history[1] }}
                 </p>
+                <br/><br/>
                 {% endfor %}
               </div>
                   <div class="mt-2 lg:mt-3">
