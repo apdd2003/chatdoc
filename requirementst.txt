@@ -29,6 +29,8 @@ fastapi==0.111.0
 fastapi-cli==0.0.2
 filelock==3.14.0
 Flask==3.0.3
+Flask-HTTPAuth==4.8.0
+Flask-Limiter==3.7.0
 flatbuffers==24.3.25
 frozenlist==1.4.1
 fsspec==2024.3.1
@@ -59,6 +61,7 @@ langchain-community==0.0.36
 langchain-core==0.1.49
 langchain-text-splitters==0.0.1
 langsmith==0.1.51
+limits==3.12.0
 markdown-it-py==3.0.0
 MarkupSafe==2.1.5
 marshmallow==3.21.1
@@ -83,6 +86,7 @@ opentelemetry-proto==1.24.0
 opentelemetry-sdk==1.24.0
 opentelemetry-semantic-conventions==0.45b0
 opentelemetry-util-http==0.45b0
+ordered-set==4.1.0
 orjson==3.10.1
 overrides==7.7.0
 packaging==23.2
