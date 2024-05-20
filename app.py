@@ -83,5 +83,20 @@ def chat():
     print(answer)
 
     return redirect(url_for('home'))
+
+
+@app.route('/redact', methods=['GET','POST'])
+@limiter.exempt
+def redact():
+    from anonymize import redaction
+    query = request.form.get('query2')
+    print(query)
+    if request.method == 'POST':
+        res = redaction(query)
+        return render_template('anonymize.html', redacted_text=res)
+
+    return render_template("anonymize.html")
+
+
 if __name__ == "__main__":
     app.run(debug=True, port=5000)
