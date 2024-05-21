@@ -21,47 +21,30 @@ Chat with Documents
                     <div
                       class="basis-full min-w-0 max-w-full sm:grow sm:basis-0"
                     >
-                      <!-- <input
-                        id="query2"
-                        name="query2"
-                        data-validation-required-message="Cannot leave this blank."
-                        class="appearance-none bg-white border border-gray-300 py-2 px-3 rounded-md text-[1em] leading-tight transition duration-200 outline-none placeholder:opacity-100 placeholder:text-gray-400 focus-within:border-indigo-700 w-full h-full"
-                        aria-label="Content"
-                        type="textarea"
-                        placeholder="Paste content with PII here"
-                        rows="10" 
-                        cols="40" 
-                      /> -->
+
                       <textarea class="form-control" id="query2"
                       name="query2" rows="20", cols="100" 
                       placeholder="Paste content with PII here" required></textarea>
                     </div>
 
                     <div
-                      class="basis-full min-w-0 max-w-full sm:grow-0 sm:basis-[initial] sm:max-w-[initial]"
+                      class="basis-full min-w-0 max-w-full sm:grow-0 "
                     >
                       <button
                         type="submit"
                         class="bg-indigo-700 text-white shadow-md text-[1em] px-4 py-2 rounded-md relative inline-flex justify-center items-center whitespace-nowrap cursor-pointer no-underline leading-tight transition-all duration-200 hover:bg-indigo-600 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-700 w-full h-full"
                       >
-                        Ask Now
+                        Redact PII
                       </button>
                     </div>
                   </form>
 
-                  <!-- <p
-                    role="alert"
-                    class="bg-teal-600/20 text-sm lg:text-base p-2 lg:p-3 rounded mt-2 lg:mt-3"
-                  >
-                    <strong>Success!</strong> Please check your inbox for the
-                    confirmation email.
-                  </p> -->
                     
                   <br/><br/>
                 <div class="text-left">
-                    <p>
+                    <pre>
                     {{ redacted_text }}
-                </p>
+                    </pre>
               </div>
                   <div class="mt-2 lg:mt-3">
                     <small class="text-xs text-gray-500"
