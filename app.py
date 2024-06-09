@@ -1,9 +1,10 @@
-from flask import Flask, render_template, redirect, url_for, flash, request, current_app, make_response, session, jsonify
+from flask import Flask, render_template, redirect, url_for, flash, request, current_app, make_response, session, jsonify, json
 from flask_limiter import Limiter
 from flask_limiter.util import get_remote_address
 from flask_httpauth import HTTPBasicAuth
 from werkzeug.security import generate_password_hash, check_password_hash
 from werkzeug.utils import secure_filename
+from transformers import AutoTokenizer, AutoModelForTokenClassification, pipeline
 import os
 from utils import chunk_embed, askdoc
 import uuid
@@ -96,6 +97,46 @@ def redact():
         return render_template('anonymize.html', redacted_text=res)
 
     return render_template("anonymize.html")
+
+
+@app.route('/entities', methods=['GET','POST'])
+@limiter.exempt
+def entities():
+    # Load BioBERT model and tokenizer
+    model_name = "d4data/biomedical-ner-all"
+    tokenizer = AutoTokenizer.from_pretrained(model_name)
+    model = AutoModelForTokenClassification.from_pretrained(model_name)
+
+    # Create a NER pipeline
+    ner_pipeline = pipeline("ner", model=model, tokenizer=tokenizer, aggregation_strategy="simple")
+    query = request.form.get('query2')
+    print(query)
+    if request.method == 'POST':
+        
+        # Define a sample clinical text
+        # text = """
+        # The patient is a 65-year-old male with a history of hypertension and diabetes mellitus,
+        # who presented with chest pain radiating to the left arm. ECG showed ST-segment elevation
+        # in leads II, III, and aVF. Cardiac enzymes were elevated, and the patient was diagnosed
+        # with an acute myocardial infarction. Treatment included aspirin, beta-blockers, and
+        # coronary angioplasty. The patient tolerated the procedure well and was transferred
+        # to the coronary care unit for further monitoring and management.
+        # """
+
+        # Perform NER
+        entities = ner_pipeline(query)
+        print(type(entities))
+        # Print the entities
+        print("Named Entities:")
+        data = []
+        for entity in entities:
+            print(entity)
+            new_data = {"entity_group":entity['entity_group'], "entity_name":entity['word']}
+            data.append(new_data)
+        print(data)
+        return render_template('ner.html', ner_data=data, query=query)
+
+    return render_template('ner.html')
 
 
 if __name__ == "__main__":

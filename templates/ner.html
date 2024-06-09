@@ -1,0 +1,60 @@
+{% extends 'base.html' %}
+{% block title %}
+Named Entity Recognition
+{% endblock %}
+
+{% block content %}
+    <div class=" container text-center">
+              <h1
+                class="mt-4 text-4xl font-bold tracking-tight text-gray-900 sm:text-6xl"
+              >
+                Named Entity Recognition
+              </h1>
+              <p class="mt-6 text-lg leading-8 text-gray-600">
+                Detect named entities from text (medical domain)
+              </p>
+              <section class="newsletter py-12 lg:py-20 text-center">
+                <div
+                  class="w-[calc(100%_-_2.5rem)] lg:w-[calc(100%_-_4rem)] mx-auto max-w-xl"
+                >
+                  <form class="flex flex-wrap gap-1.5 lg:gap-2" method="POST" action="{{url_for('entities') }}" >
+                    <div
+                      class="basis-full min-w-0 max-w-full sm:grow sm:basis-0"
+                    >
+
+                      <textarea class="form-control" id="query2"
+                      name="query2"  rows="10", cols="100" style="border-width: 4px;"  
+                      placeholder="Paste content with medical entities here" required>{{ query }}</textarea>
+                    </div>
+
+                    <div
+                      class="basis-full min-w-0 max-w-full sm:grow-0 "
+                    >
+                      <button
+                        type="submit"
+                        class="bg-indigo-700  shadow-md text-[1em] px-4 py-2 rounded-md relative inline-flex justify-center items-center whitespace-nowrap cursor-pointer no-underline leading-tight transition-all duration-200 hover:bg-indigo-600 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-700 w-full h-full"
+                      >
+                        Detect Entities
+                      </button>
+                    </div>
+                  </form>
+
+                    
+                  <br/><br/>
+                <div class="text-left">
+                     {% if ner_data  %}
+                    {% for data in ner_data %}
+                    <p class="text-left m-1">Type: {{data.entity_group}} -- Value: {{data.entity_name}}</p>
+                    {% endfor %}
+                    {% endif %}
+              </div>
+                  <div class="mt-2 lg:mt-3">
+                    <small class="text-xs text-gray-500"
+                      >By using you agree to our
+                      <a class="text-gray-700" href="#0">privacy policy</a
+                      >.</small>
+                  </div>
+                </div>
+              </section>
+            </div>
+{% endblock %}
