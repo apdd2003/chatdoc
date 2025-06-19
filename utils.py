@@ -18,8 +18,8 @@ def chunk_embed(file_name, np):
         f.write(bytes_data)
         name, extension = os.path.splitext(file_name)
         if extension == '.pdf':
-            from langchain.document_loaders import PyPDFLoader
-            loader = PyPDFLoader(file_name)
+            from langchain.document_loaders import PDFPlumberLoader
+            loader = PDFPlumberLoader(file_name)
         elif extension == '.docx':
             from langchain.document_loaders import Docx2txtLoader
             loader = Docx2txtLoader(file_name)
@@ -27,6 +27,7 @@ def chunk_embed(file_name, np):
             from langchain.document_loaders import TextLoader
             loader = TextLoader(file_name)
         documents = loader.load()
+        print(documents[0].page_content[:1000])
         text_splitter = RecursiveCharacterTextSplitter(chunk_size=1000, chunk_overlap=200)
         chunks = text_splitter.split_documents(documents)
         embeddings = OpenAIEmbeddings()
